@@ -33,11 +33,14 @@ app.use(express.static('public'))
 // 設定路由
 // Restaurant 首頁
 app.get('/', (req, res) => {
-  return res.render('index')
+  Restaurant.find((err, restaurants) => {                                 // 把 Todo model 所有的資料都抓回來
+    if (err) return console.error(err)
+    return res.render('index', { restaurants: restaurants })  // 將資料傳給 index 樣板
+  })
 })
 // 列出全部 Restaurant
 app.get('/restaurants', (req, res) => {
-  res.send('列出所有 Restaurant')
+  return res.redirect('/')
 })
 // 新增一筆 Restaurant 頁面
 app.get('/restaurant/new', (req, res) => {
