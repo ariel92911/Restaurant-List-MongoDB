@@ -2,6 +2,13 @@ const express = require('express')               // 載入 express
 const app = express()                            // 建立 express instance
 const mongoose = require('mongoose')
 
+// 引用 express-handlebars
+const exphbs = require('express-handlebars');
+
+// 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
+
 mongoose.connect('mongodb://localhost/restaurant_list', { useNewUrlParser: true })
 
 // mongoose 連線後透過 mongoose.connection 拿到 Connection 的物件
@@ -20,10 +27,13 @@ db.once('open', () => {
 // 載入 restaurant model
 const Restaurant = require('./models/restaurant')
 
+// setting static files
+app.use(express.static('public'))
+
 // 設定路由
 // Restaurant 首頁
 app.get('/', (req, res) => {
-  res.send('Restaurant首頁')
+  return res.render('index')
 })
 // 列出全部 Restaurant
 app.get('/restaurants', (req, res) => {
