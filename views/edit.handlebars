@@ -10,86 +10,92 @@
           <form action="/restaurant/{{{restaurant.id}}}?_method=PUT" method="POST">
 
             <div class="form-group form-row">
-              <label for="name" class="col-md-4 col-form-label">
+              <label for="name" class="col-md-2 col-form-label">
                 餐廳名稱
               </label>
-              <div class="col-md-8">
+              <div class="col-md-10">
                 <input type="text" name="name" class="form-control" id="name" placeholder="餐廳名稱"
-                  value="{{restaurant.name}}">
+                  value="{{restaurant.name}}" required>
               </div>
             </div>
 
             <div class="form-group form-row">
-              <label for="category" class="col-md-4 col-form-label">
+              <label for="category" class="col-md-2 col-form-label">
                 餐廳類別
               </label>
-              <div class="col-md-8">
-                <input type="text" name="category" class="form-control" id="category" placeholder=""
-                  value="{{{restaurant.category}}}">
+              <div class="col-md-10">
+                <input type="text" name="category" class="form-control" id="category" placeholder="餐廳類別"
+                  value="{{{restaurant.category}}}" required>
               </div>
             </div>
 
             <div class="form-group form-row">
-              <label for="image" class="col-md-4 col-form-label">
+              <label for="image" class="col-md-2 col-form-label">
                 餐聽圖片
               </label>
-              <div class="col-md-8">
-                <input type="text" name="image" class="form-control" id="image" placeholder=""
+              <div class="col-md-10">
+                <input type="text" name="image" class="form-control" id="image" placeholder="圖片連結網址"
                   value="{{{restaurant.image}}}">
               </div>
             </div>
 
             <div class="form-group form-row">
-              <label for="location" class="col-md-4 col-form-label">
+              <label for="location" class="col-md-2 col-form-label">
                 地址
               </label>
-              <div class="col-md-8">
+              <div class="col-md-10">
                 <input type="text" name="location" class="form-control" id="location" placeholder="地址"
-                  value="{{{restaurant.location}}}">
+                  value="{{{restaurant.location}}}" required>
               </div>
             </div>
 
             <div class="form-group form-row">
-              <label for="phone" class="col-md-4 col-form-label">
+              <label for="phone" class="col-md-2 col-form-label">
                 電話
               </label>
-              <div class="col-md-8">
+              <div class="col-md-10">
                 <input type="text" name="phone" class="form-control" id="phone" placeholder="電話"
-                  value="{{{restaurant.phone}}}">
+                  value="{{{restaurant.phone}}}" required>
               </div>
             </div>
 
             <div class="form-group form-row">
-              <label for="google_map" class="col-md-4 col-form-label">
+              <label for="google_map" class="col-md-2 col-form-label">
                 Google map
               </label>
-              <div class="col-md-8">
-                <input type="text" name="google_map" class="form-control" id="google_map" placeholder=""
+              <div class="col-md-10">
+                <input type="text" name="google_map" class="form-control" id="google_map" placeholder="餐廳Google map網址"
                   value="{{{restaurant.google_map}}}">
               </div>
             </div>
 
             <div class="form-group form-row">
-              <label for="rating" class="col-md-4 col-form-label">
+              <label for="rating" class="col-md-2 col-form-label">
                 評分
               </label>
-              <div class="col-md-8">
-                <input type="number" name="rating" class="form-control" id="rating" placeholder="" min="0" max="5"
-                  step="0.1" value="{{{restaurant.rating}}}">
+              <div class="col-md-10">
+                <input type="number" name="rating" class="form-control" id="rating" placeholder="評分最低0.0，最高5.0" min="0"
+                  max="5" step="0.1" value="{{{restaurant.rating}}}" required>
               </div>
             </div>
 
             <div class="form-group form-row">
-              <label for="description" class="col-md-4 col-form-label">
+              <label for="description" class="col-md-2 col-form-label">
                 描述
               </label>
-              <div class="col-md-8">
+              <div class="col-md-10">
                 <input type="text" name="description" class="form-control" id="description" placeholder="簡單描述這家餐廳..."
                   value="{{{restaurant.description}}}">
               </div>
             </div>
 
-            <button class="btn btn-success" type="submit">Edit</button>
+            <div class="row justify-content-between">
+              <div class="col-auto mr-auto"></div>
+              <div class="col-auto">
+                <button class="btn btn-success" type="submit">編輯送出</button>
+              </div>
+            </div>
+
           </form>
         </div>
 

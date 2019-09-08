@@ -2,10 +2,16 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
-      <a href="/restaurant/{{{restaurant.id}}}/edit">edit</a>
-      <form action="/restaurant/{{{restaurant.id}}}/delete?_method=DELETE" method="POST" style="display: inline;">
-        <button type="submit">delete</button>
-      </form>
+      <div class="row justify-content-between">
+        <div class="col-auto mr-auto"></div>
+        <div class="col-auto">
+          <a href="/restaurant/{{{restaurant.id}}}/edit" class="btn btn-outline-dark btn-sm">edit</a>
+          <form action="/restaurant/{{{restaurant.id}}}/delete?_method=DELETE" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-outline-dark btn-sm">delete</button>
+          </form>
+        </div>
+      </div>
+
 
       <p class="mb-1">
         <span class="text-secondary">
