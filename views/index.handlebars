@@ -37,7 +37,10 @@
                 {{this.rating}}
                 <i class="fas fa-star fa-xs"></i>
                 <a href="/restaurant/{{this.id}}/edit"><i class="fas fa-edit"></i></a>
-                <button type="submit"><i class="fas fa-trash-alt"></i></button>
+                <form action="/restaurant/{{{this.id}}}/delete" method="POST" style="display: inline;">
+                  <button type="submit"><i class="fas fa-trash-alt"></i></button>
+                </form>
+
               </span>
 
             </div>
