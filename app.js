@@ -54,7 +54,10 @@ app.get('/restaurant/new', (req, res) => {
 })
 // 顯示一筆 Restaurant 的詳細內容
 app.get('/restaurant/:id', (req, res) => {
-  res.send('顯示 restaurant 的詳細內容')
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    return res.render('show', { restaurant: restaurant })
+  })
 })
 // 新增一筆  Restaurant
 app.post('/restaurant', (req, res) => {
