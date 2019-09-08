@@ -39,7 +39,7 @@ app.use(express.static('public'))
 // 設定路由
 // Restaurant 首頁
 app.get('/', (req, res) => {
-  Restaurant.find((err, restaurants) => {                                 // 把 Todo model 所有的資料都抓回來
+  Restaurant.find((err, restaurants) => {
     if (err) return console.error(err)
     return res.render('index', { restaurants: restaurants })  // 將資料傳給 index 樣板
   })
@@ -80,11 +80,28 @@ app.post('/restaurant', (req, res) => {
 })
 // 修改 Restaurant 頁面
 app.get('/restaurant/:id/edit', (req, res) => {
-  res.send('修改 Restaurant 頁面')
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    return res.render('edit', { restaurant: restaurant })
+  })
 })
 // 修改 Restaurant
 app.post('/restaurant/:id/edit', (req, res) => {
-  res.send('修改 Restaurant')
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    restaurant.name = req.body.name,
+      restaurant.category = req.body.category,
+      restaurant.image = req.body.image,
+      restaurant.location = req.body.location,
+      restaurant.phone = req.body.phone,
+      restaurant.google_map = req.body.google_map,
+      restaurant.rating = req.body.rating,
+      restaurant.description = req.body.description,
+      restaurant.save(err => {
+        if (err) return console.error(err)
+        return res.redirect(`/restaurant/${req.params.id}`)
+      })
+  })
 })
 // 刪除 Restaurant
 app.post('/restaurant/:id/delete', (req, res) => {
