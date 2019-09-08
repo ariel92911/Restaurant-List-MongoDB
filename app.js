@@ -42,83 +42,9 @@ const Restaurant = require('./models/restaurant')
 // setting static files
 app.use(express.static('public'))
 
-// 設定路由
-// Restaurant 首頁
-app.get('/', (req, res) => {
-  Restaurant.find((err, restaurants) => {
-    if (err) return console.error(err)
-    return res.render('index', { restaurants: restaurants })  // 將資料傳給 index 樣板
-  })
-})
-// 列出全部 Restaurant
-app.get('/restaurants', (req, res) => {
-  return res.redirect('/')
-})
-// 新增一筆 Restaurant 頁面
-app.get('/restaurant/new', (req, res) => {
-  return res.render('new')
-})
-// 顯示一筆 Restaurant 的詳細內容
-app.get('/restaurant/:id', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    if (err) return console.error(err)
-    return res.render('show', { restaurant: restaurant })
-  })
-})
-// 新增一筆  Restaurant
-app.post('/restaurant', (req, res) => {
-  // 建立 Restaurant model 實例
-  const restaurant = new Restaurant({
-    name: req.body.name,
-    category: req.body.category,
-    image: req.body.image,
-    location: req.body.location,
-    phone: req.body.phone,
-    google_map: req.body.google_map,
-    rating: req.body.rating,
-    description: req.body.description,
-  })
-  // 存入資料庫
-  restaurant.save(err => {
-    if (err) return console.error(err)
-    return res.redirect('/')  // 新增完成後，將使用者導回首頁
-  })
-})
-// 修改 Restaurant 頁面
-app.get('/restaurant/:id/edit', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    if (err) return console.error(err)
-    return res.render('edit', { restaurant: restaurant })
-  })
-})
-// 修改 Restaurant
-app.put('/restaurant/:id', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    if (err) return console.error(err)
-    restaurant.name = req.body.name,
-      restaurant.category = req.body.category,
-      restaurant.image = req.body.image,
-      restaurant.location = req.body.location,
-      restaurant.phone = req.body.phone,
-      restaurant.google_map = req.body.google_map,
-      restaurant.rating = req.body.rating,
-      restaurant.description = req.body.description,
-      restaurant.save(err => {
-        if (err) return console.error(err)
-        return res.redirect(`/restaurant/${req.params.id}`)
-      })
-  })
-})
-// 刪除 Restaurant
-app.delete('/restaurant/:id/delete', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    if (err) return console.error(err)
-    restaurant.remove(err => {
-      if (err) return console.error(err)
-      return res.redirect('/')
-    })
-  })
-})
+// 載入路由器
+app.use('/', require('./routes/home'))
+app.use('/restaurant', require('./routes/restaurants'))
 
 // 設定 express port 3000
 app.listen(3000, () => {
