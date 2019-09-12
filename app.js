@@ -45,6 +45,7 @@ app.use(express.static('public'))
 // 載入路由器
 app.use('/', require('./routes/home'))
 app.use('/restaurant', require('./routes/restaurants'))
+app.use('/users', require('./routes/user'))
 
 // 設定 express port 3000
 app.listen(3000, () => {
