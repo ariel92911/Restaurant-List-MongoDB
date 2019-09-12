@@ -4,13 +4,15 @@ const router = express.Router()
 const passport = require('passport')
 const User = require('../models/user')
 
+
+
 // 登入頁面
 router.get('/login', (req, res) => {
   res.render('login')
 })
 
 // 登入檢查
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/users/login'

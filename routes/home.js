@@ -7,9 +7,10 @@ const { authenticated } = require('../config/auth')
 
 // 設定首頁路由器
 router.get('/', authenticated, (req, res) => {
-  Restaurant.find((err, restaurants) => {
-    if (err) return console.error(err)
-    return res.render('index', { restaurants: restaurants })
-  })
+  Restaurant.find({ userId: req.user._id })
+    .exec((err, restaurants) => {
+      if (err) return console.error(err)
+      return res.render('index', { restaurants: restaurants })
+    })
 })
 module.exports = router
