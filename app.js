@@ -6,10 +6,7 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
-
-
-
-
+const passport = require('passport')
 
 
 // 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
@@ -38,6 +35,16 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+require('./config/passport')(passport)
+
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 
 // 載入 restaurant model
 const Restaurant = require('./models/restaurant')

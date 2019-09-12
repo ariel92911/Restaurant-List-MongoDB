@@ -1,6 +1,7 @@
 // routes/user.js
 const express = require('express')
 const router = express.Router()
+const passport = require('passport')
 const User = require('../models/user')
 
 // 登入頁面
@@ -10,7 +11,10 @@ router.get('/login', (req, res) => {
 
 // 登入檢查
 router.post('/login', (req, res) => {
-  res.send('login')
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/users/login'
+  })(req, res, next)
 })
 
 // 註冊頁面
