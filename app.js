@@ -1,24 +1,21 @@
-const express = require('express')               // 載入 express
-const app = express()                            // 建立 express instance
+const express = require('express')
+const app = express()
+
 const mongoose = require('mongoose')
-
-// 引用 express-handlebars
 const exphbs = require('express-handlebars')
-
-// 引用 body-parser
 const bodyParser = require('body-parser')
-
-// 引用 method-override
 const methodOverride = require('method-override')
+const session = require('express-session')
 
-// 設定 bodyParser
-app.use(bodyParser.urlencoded({ extended: true }))
+
+
+
+
 
 // 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
-
-// 設定 method-override
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 mongoose.connect('mongodb://localhost/restaurant_list', { useNewUrlParser: true })
@@ -35,6 +32,12 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected!')
 })
+
+app.use(session({
+  secret: 'my secret key',
+  resave: false,
+  saveUninitialized: true,
+}))
 
 // 載入 restaurant model
 const Restaurant = require('./models/restaurant')
