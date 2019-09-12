@@ -12,6 +12,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
+const flash = require('connect-flash')
 
 
 // 告訴 express 使用 handlebars 當作 template engine 並預設 layout 是 main
@@ -19,6 +20,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use(express.static('public'))
 
 mongoose.connect('mongodb://localhost/restaurant_list', { useNewUrlParser: true, useCreateIndex: true })
 
@@ -52,11 +54,15 @@ app.use((req, res, next) => {
   next()
 })
 
-// 載入 restaurant model
-const Restaurant = require('./models/restaurant')
+app.use(flash())
 
-// setting static files
-app.use(express.static('public'))
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
+  next()
+})
 
 // 載入路由器
 app.use('/', require('./routes/home'))

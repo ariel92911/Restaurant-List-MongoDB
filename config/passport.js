@@ -15,7 +15,6 @@ module.exports = passport => {
         if (!user) {
           return done(null, false, { message: 'That email is not registered' })
         }
-
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err
           if (isMatch) {
@@ -40,10 +39,10 @@ module.exports = passport => {
         email: profile._json.email
       }).then(user => {
         if (!user) {
-          var randomPassword = Math.random().toString(36).slice(-8)
+          const randomPassword = Math.random().toString(36).slice(-8)
           bcrypt.genSalt(10, (err, salt) =>
             bcrypt.hash(randomPassword, salt, (err, hash) => {
-              var newUser = User({
+              const newUser = User({
                 name: profile._json.name,
                 email: profile._json.email,
                 password: hash
@@ -62,11 +61,9 @@ module.exports = passport => {
     })
   )
 
-
   passport.serializeUser((user, done) => {
     done(null, user.id)
   })
-
 
   passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => {
