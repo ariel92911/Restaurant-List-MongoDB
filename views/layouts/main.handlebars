@@ -25,7 +25,12 @@
             width="30" height="30" class="d-inline-block align-top" alt="好。吃">
           我的餐廳清單
         </a>
-        <a href="/restaurant/new" class="btn btn-outline-info">Create</a>
+
+        {{#if isAuthenticated}}
+        <a href="/users/logout" class="btn btn-outline-info">Logout</a>
+        {{else}}
+        <a href="/users/login" class="btn btn-outline-info">Login</a>
+        {{/if}}
       </div>
     </nav>
 
