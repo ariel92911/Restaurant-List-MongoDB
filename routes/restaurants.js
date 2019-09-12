@@ -1,4 +1,4 @@
-// routes/todo.js
+// routes/restaurants.js
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant')
