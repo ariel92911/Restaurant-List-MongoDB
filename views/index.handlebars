@@ -5,7 +5,7 @@
       <form action="/search">
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
+          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳" aria-label="Restaurant Name..."
             value="{{keyword}}" aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
@@ -16,12 +16,31 @@
   </div>
 </div>
 
-<!-- restaurant list -->
 
 <div class="container mt-5">
-  <a href="/restaurant/new" class="btn btn-outline-info">Create</a>
-  <div class="row">
 
+  <div class="row justify-content-between mb-5">
+    <div class="col-auto mr-auto">
+      <a href="/restaurant/new" class="btn btn-outline-info">Create</a>
+    </div>
+    <div class="col-auto">
+      <div class="dropdown mr-3">
+        <button class="btn  btn-outline-info dropdown-toggle" type="button" data-toggle="dropdown">
+          排序方式
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href={{#if keyword}} "/search/?keyword={{keyword}}&sortTarget=name&sortType=asc"
+            {{else}} "/?sortTarget=name&sortType=asc" {{/if}}>A->Z
+          </a>
+          <a class="dropdown-item" href={{#if keyword}} "/search/?keyword={{keyword}}&sortTarget=name&sortType=desc"
+            {{else}} "/?sortTarget=name&sortType=desc" {{/if}}>Z->A</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- restaurant list -->
+  <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
 
