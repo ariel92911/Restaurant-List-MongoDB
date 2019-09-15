@@ -4,6 +4,7 @@ const Restaurant = require('../models/restaurant')
 
 // 搜尋一筆 restaurant
 router.get('/', (req, res) => {
+  console.log(req.query)
   const keyword = req.query.keyword
   const regex = new RegExp(keyword, 'gi')
 
@@ -19,7 +20,7 @@ router.get('/', (req, res) => {
     })
 
     console.log(searchResult)
-    return res.render('index', { restaurant: searchResult, keyword })
+    return res.render('index', { restaurants: searchResult, keyword })
   })
 })
 
