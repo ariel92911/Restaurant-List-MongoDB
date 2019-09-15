@@ -3,7 +3,7 @@
 
 
 ## Installing
-1. 打開終端機，按照步驟 2~5 在終端機輸入指令 ( 指令不含 $ 符號 )
+1. 打開終端機
 
 
 2. 下載 Restaurant-List-MongoDB 資料夾 ( 下載位置會依你打開終端機的位置而定 )
@@ -12,25 +12,57 @@
 $ git clone https://github.com/ariel92911/Restaurant-List-MongoDB.git
 ```
 
-3. 進入 Restaurant-List-MongoDB 資料夾
+3. 請在 https://developers.facebook.com/ 申請第三方登入用的金鑰
+
+4. 在本檔案的跟目錄新增 .env 的檔案，並輸入以下程式碼
+```
+FACEBOOK_ID = <輸入FB ID>
+FACEBOOK_SECRET = <輸入FB SECRET>
+FACEBOOK_CALLBACK=http://www.example.com/auth/facebook/callback 
+```
+
+5. 進入 Restaurant-List-MongoDB 資料夾
 ```
 $ cd Restaurant-List-MongoDB
 ```
 
-4. 安裝npm套件
+6. 安裝npm套件
 ```
 $ npm install
 ```
 
-5. 執行專案
+7. 至 .\Restaurant-Llis with MongoDB\models\seeds 資料夾，執行以下指令，以新增種子資料
+```
+$ node restaurantSeeder.js
+```
+
+8. 回到根目錄，執行專案
 ```
 $ npm run dev
 ```
 
-6. 在瀏覽器輸入以下網址以使用 Restaurant-List-MongoDB
+9. 在瀏覽器輸入以下網址以使用 Restaurant-List-MongoDB
 ```
 http://localhost:3000
 ```
+
+## 種子資料
+1. 第一位使用者：
+
++ email: user1@example.com
+
++ password: 12345678
+
++ 擁有 #1, #2, #3 號餐廳
+
+2. 第二位使用者：
+
++ email: user2@example.com
+
++ password: 12345678
+
++ 擁有 #4, #5, #6 號餐廳
+
 
 ## How to use
 *使用者可以新增一家餐廳
@@ -42,5 +74,9 @@ http://localhost:3000
 *使用者可以修改一家餐廳的資訊
 
 *使用者可以刪除一家餐廳
+
+*使用者可以搜尋餐廳
+
+*使用者可以改變餐廳排序
 
 
